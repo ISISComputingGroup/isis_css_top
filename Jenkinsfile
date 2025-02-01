@@ -20,7 +20,11 @@ pipeline {
     stage("Checkout") {
       steps {
         echo "Branch: ${env.BRANCH_NAME}"
-        checkout scm
+        timeout(time: 2, unit: 'HOURS') {
+          retry(5) {
+		  checkout scm
+	  }
+	}
       }
     }
     
@@ -82,6 +86,7 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr:'10'))
     timeout(time: 600, unit: 'MINUTES')
     disableConcurrentBuilds()
+    skipDefaultCheckout(true)
 	timestamps()
 	office365ConnectorWebhooks([[
                     name: "Office 365",
