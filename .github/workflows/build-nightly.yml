@@ -1,0 +1,9 @@
+name: build-nightly
+on:
+  schedule:
+    - cron: "20 1 * * *"
+  workflow_dispatch:
+
+jobs:
+  build-nightly:
+    uses: ./.github/workflows/build.yml
