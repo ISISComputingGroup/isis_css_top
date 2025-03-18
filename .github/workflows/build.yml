@@ -1,0 +1,35 @@
+name: build
+
+on: [pull_request, workflow_call, workflow_dispatch]
+
+env:
+  MAVEN_OPTS: -Xmx8192m
+  JAVA_TOOL_OPTIONS: -Djdk.util.zip.disableZip64ExtraFieldValidation=true
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          java-package: 'jdk+fx'
+          cache: maven
+      - name: Build maven-osgi-bundles
+        working-directory: ./cs-studio
+        run: mvn verify -f maven-osgi-bundles/pom.xml -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore
+      - name: Build cs-studio
+        working-directory: ./cs-studio
+        run: mvn verify -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=p2repo -DskipTests=true
+      - name: Upload zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: cs-studio
+          path: |
+            cs-studio/product/repository/target/products/*.zip
+          compression-level: 0
+          if-no-files-found: error
