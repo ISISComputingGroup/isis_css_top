@@ -1,6 +1,0 @@
-# match line starting with ‘error ‘, case-insensitive
-# also allow for [timestamp]
-error /(?i)^(\[[^]]*\] )?error:?/
-error /(?i)^(\[[^]]*\] )?fatal:?/
-warning /(?i)^(\[[^]]*\] )?warning:?/
-info /(?i)^(\[[^]]*\] )?info:?/
