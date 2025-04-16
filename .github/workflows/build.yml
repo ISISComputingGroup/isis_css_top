@@ -30,7 +30,7 @@ jobs:
         with:
           name: cs-studio-products
           path: |
-            cs-studio/repository/target/products/**       
+            cs-studio/product/repository/target/products/*.zip       
           compression-level: 0
           if-no-files-found: error
           retention-days: 3
@@ -40,7 +40,7 @@ jobs:
           name: cs-studio-p2
           path: |
             cs-studio
-            !cs-studio/repository/target/products/**
+            !cs-studio/product/repository/target/products/**
             !cs-studio/build
             !cs-studio/workspace            
           compression-level: 0
