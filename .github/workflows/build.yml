@@ -21,10 +21,10 @@ jobs:
           cache: maven
       - name: Build maven-osgi-bundles
         working-directory: ./cs-studio
-        run: mvn verify -T8 -f maven-osgi-bundles/pom.xml -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore
+        run: mvn verify -f maven-osgi-bundles/pom.xml -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore
       - name: Build cs-studio
         working-directory: ./cs-studio
-        run: mvn verify -T8 -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=p2repo -DskipTests=true
+        run: mvn verify -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=p2repo -DskipTests=true
       - name: Upload products
         uses: actions/upload-artifact@v4
         with:
