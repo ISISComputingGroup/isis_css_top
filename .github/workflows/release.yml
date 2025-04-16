@@ -8,6 +8,7 @@ jobs:
   release:
     if: github.ref_type == 'tag'
     name: Release
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/download-artifact@v4
