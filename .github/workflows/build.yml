@@ -21,15 +21,28 @@ jobs:
           cache: maven
       - name: Build maven-osgi-bundles
         working-directory: ./cs-studio
-        run: mvn verify -f maven-osgi-bundles/pom.xml -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore
+        run: mvn verify -T8 -f maven-osgi-bundles/pom.xml -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore
       - name: Build cs-studio
         working-directory: ./cs-studio
-        run: mvn verify -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=p2repo -DskipTests=true
-      - name: Upload artefact
+        run: mvn verify -T8 -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=p2repo -DskipTests=true
+      - name: Upload products
         uses: actions/upload-artifact@v4
         with:
-          name: cs-studio
+          name: cs-studio-products
+          path: |
+            cs-studio/repository/target/products/**       
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 3
+      - name: Upload p2 repo
+        uses: actions/upload-artifact@v4
+        with:
+          name: cs-studio-p2
           path: |
             cs-studio
+            !cs-studio/repository/target/products/**
+            !cs-studio/build
+            !cs-studio/workspace            
+          compression-level: 0
           if-no-files-found: error
           retention-days: 3
