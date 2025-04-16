@@ -21,10 +21,13 @@ jobs:
         '${{ github.ref_name }}'
         --repo '${{ github.repository }}'
         --notes ""
-    - name: Upload artifact signatures to GitHub Release
+    - name: Zip release
+      run: >-
+        zip -r cs-studio.zip cs-studio-release
+    - name: Upload artifacts to GitHub Release
       env:
         GITHUB_TOKEN: ${{ github.token }}
       run: >-
         gh release upload
-        '${{ github.ref_name }}' cs-studio-release/**
+        '${{ github.ref_name }}' cs-studio.zip
         --repo '${{ github.repository }}'

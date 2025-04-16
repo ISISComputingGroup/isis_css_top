@@ -32,4 +32,4 @@ jobs:
           path: |
             cs-studio
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 3
