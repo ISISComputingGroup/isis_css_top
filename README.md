@@ -2,6 +2,15 @@
 
 Top level repository for build of cs-studio with isis customisations
 
+# Release process
+
+```
+git tag 2025.01.01  # Replace with today's date.
+git push origin tag 2025.01.01
+```
+
+Release will be built automatically by github actions. After it builds, manually deploy the p2 site to `icp_p2` area and binaries to `icp_binaries` area.
+
 # Developer build (maven)
 
 ```

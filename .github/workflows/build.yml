@@ -25,11 +25,24 @@ jobs:
       - name: Build cs-studio
         working-directory: ./cs-studio
         run: mvn verify -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=p2repo -DskipTests=true
-      - name: Upload zip
+      - name: Upload products
         uses: actions/upload-artifact@v4
         with:
-          name: cs-studio
+          name: cs-studio-products
           path: |
-            cs-studio/product/repository/target/products/*.zip
+            cs-studio/product/repository/target/products/*.zip       
           compression-level: 0
           if-no-files-found: error
+          retention-days: 3
+      - name: Upload p2 repo
+        uses: actions/upload-artifact@v4
+        with:
+          name: cs-studio-p2
+          path: |
+            cs-studio
+            !cs-studio/product/repository/target/products/**
+            !cs-studio/build
+            !cs-studio/workspace            
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 3
