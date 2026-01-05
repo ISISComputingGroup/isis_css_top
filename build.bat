@@ -24,7 +24,7 @@ set "MAVEN_OPTS=-Xmx4096m"
 REM general JVM options also for eclipse/tycho
 set "JAVA_TOOL_OPTIONS=-Djdk.util.zip.disableZip64ExtraFieldValidation=true"
 
-for /D %%I in ( "C:\Program Files\AdoptOpenJDK\jdk-17*" "C:\Program Files\Eclipse Adoptium\jdk-17*" ) do SET "JDKDIR=%%I"
+for /D %%I in ( "C:\Program Files\AdoptOpenJDK\jdk-17*" "C:\Program Files\Eclipse Adoptium\jdk-17*" "C:\tools\jdk-17*" ) do SET "JDKDIR=%%I"
 
 if "%JDKDIR%" == "" (
 	@echo "ERROR: Cannot find JDK 17 - please check/install"
