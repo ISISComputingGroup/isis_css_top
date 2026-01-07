@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.diirt</groupId>
+        <artifactId>diirt-all</artifactId>
+        <version>3.1.8-SNAPSHOT</version>
+    </parent>
+    <artifactId>pvmanager-all</artifactId>
+    <name>pvmanager</name>
+    <description>A library to create well behaved clients for aggregating and processing
+        real-time live data.</description>
+    <packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>diirt-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    <modules>
+        <module>service</module>
+        <module>datasource</module>
+        <module>service-jdbc</module>
+        <module>service-exec</module>
+        <module>datasource-sample</module>
+        <module>datasource-test</module>
+        <module>datasource-extra</module>
+        <module>datasource-graphene</module>
+        <module>datasource-vtype</module>
+        
+        <module>datasource-file</module>
+        <module>datasource-file-json</module>
+        <module>datasource-formula</module>
+        <module>datasource-integration</module>
+        <module>datasource-loc</module>
+        <module>datasource-sim</module>
+        <module>datasource-sys</module>
+  </modules>
+</project>
