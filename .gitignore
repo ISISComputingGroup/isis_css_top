@@ -1,7 +1,3 @@
-.m2/repository/*
-!.m2/repository/org
-.m2/repository/org/*
-!.m2/repository/org/diirt/
-!.m2/repository/org/jacpfx/
+.m2/
 build.log
 /jre/
