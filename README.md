@@ -11,6 +11,17 @@ git push origin tag 2025.01.01
 
 Release will be built automatically by github actions. After it builds, manually deploy the p2 site to `icp_p2` area and binaries to `icp_binaries` area.
 
+# Dependencies
+
+Some dependencies of cs-studio are no longer available via maven central (due to being very old `SNAPSHOT` builds).
+
+They are instead made available on `https://isiscomputinggroup.github.io/isis_css_top/`, which is added to
+[the list of maven repositories](https://github.com/ISISComputingGroup/cs-studio/blob/27c3b0f61e6c5444f65a1b591a037c55083513c9/pom.xml#L76)
+which cs-studio uses at build time. That repo is deployed from the `gh-pages` branch of this repository.
+
+Pushing new content to the `gh-pages` branch is a manual process. To keep the repository size as small as possible, prefer to `git commit --amend`
+the single commit on the `gh-pages` branch rather than creating new commits.
+
 # Developer build (maven)
 
 ```
@@ -61,14 +72,3 @@ Next:
 - In the run configurations menu select the box to "clear workspace before launching"
 - Press apply and save
 - Launch!
-
-# Notes
-
-The CSS repos should be pinned at the following specific versions. Later versions merge in Phoebus code which is incompatible with our code-base so we cannot use them yet (it requires java 11 and java-FX).
-
-- cs-studio-thirdparty: 5d9eb92ced5372c64ac37693ab1f4c16dae01f0f
-- diirt: 5baa4d15c546c6df10356a266837a0622b56e423
-- maven-osgi-bundles: 174629309dab59ee2852e0272fe31a24cecb41ed
-- org.csstudio.display.builder: b8eda4fb6fe27012ff07899d125faa3a29abcc08
-
-The ISIS repos are ok to be on master as we have forks of these.
