@@ -1,7 +1,7 @@
 name: build-nightly
 on:
   schedule:
-    - cron: "20 1 * * *"
+    - cron: "20 7 * * 1-5"
   workflow_dispatch:
 
 jobs:
