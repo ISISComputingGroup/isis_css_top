@@ -20,11 +20,23 @@ jobs:
           java-package: 'jdk+fx'
           cache: maven
       - name: Build maven-osgi-bundles
-        working-directory: ./cs-studio
-        run: mvn verify -f maven-osgi-bundles/pom.xml -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dmaven.repo.local=../.m2/repository
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 30
+          max_attempts: 10
+          retry_wait_seconds: 300
+          command: |
+            cd ./cs-studio
+            mvn verify -f maven-osgi-bundles/pom.xml -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dmaven.repo.local=../.m2/repository
       - name: Build cs-studio
-        working-directory: ./cs-studio
-        run: mvn verify -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=p2repo -DskipTests=true -Dmaven.repo.local=../.m2/repository
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 30
+          max_attempts: 10
+          retry_wait_seconds: 300
+          command: |
+            cd ./cs-studio
+            mvn verify -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=p2repo -DskipTests=true -Dmaven.repo.local=../.m2/repository
       - name: Upload products
         uses: actions/upload-artifact@v7
         with:
