@@ -28,6 +28,7 @@ jobs:
           command: |
             cd ./cs-studio
             mvn verify -f maven-osgi-bundles/pom.xml -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dmaven.repo.local=../.m2/repository
+          on_retry_command: git clean -fqdx
       - name: Build cs-studio
         uses: nick-fields/retry@v4
         with:
