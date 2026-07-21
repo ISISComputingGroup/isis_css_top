@@ -19,25 +19,17 @@ jobs:
           java-version: '17'
           java-package: 'jdk+fx'
           cache: maven
-      - name: Build maven-osgi-bundles
+      - name: Build maven-osgi-bundles and cs-studio
         uses: nick-fields/retry@v4
         with:
-          timeout_minutes: 30
+          timeout_minutes: 60
           max_attempts: 10
           retry_wait_seconds: 300
           command: |
             cd ./cs-studio
             mvn verify -f maven-osgi-bundles/pom.xml -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dmaven.repo.local=../.m2/repository
-          on_retry_command: git clean -fqdx
-      - name: Build cs-studio
-        uses: nick-fields/retry@v4
-        with:
-          timeout_minutes: 30
-          max_attempts: 10
-          retry_wait_seconds: 300
-          command: |
-            cd ./cs-studio
             mvn verify -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=p2repo -DskipTests=true -Dmaven.repo.local=../.m2/repository
+          on_retry_command: git clean -fqdx
       - name: Upload products
         uses: actions/upload-artifact@v7
         with:
